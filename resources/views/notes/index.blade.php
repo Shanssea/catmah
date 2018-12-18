@@ -50,16 +50,27 @@
                                                         <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
-                                                    <form class="form-signin" method="POST" action="{{ route('NotesController@updateTitle') }}">
+                                                    {{-- <form class="form-signin" method="POST" action="{{'/home'}}">
                                                         <div class="modal-body">
                                                             <input id="title" type="text" class="form-control" name="title" value="{{ old('title') }}" autofocus>
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                            <a href="{{ route('NoteController@updateTitle') }}" class="btn btn-block btn-secondary text-uppercase">{{ __('Simpan') }}</a>
-                                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                                            <button type="submit" class="btn btn-lg btn-signin btn-block text-uppercase">
+                                                                {{ __('Save') }}
+                                                            </button>
                                                         </div>
-                                                    </form>
+                                                    </form> --}}
+                                                    {!! Form::open(['action' => ['NotesController@updateTitle',$note->id],'method'=>'POST']) !!}
+                                                        <div class="modal-body">
+                                                            {{Form::text('title',$note->title,['class' => 'form-control'])}}
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            {{Form::hidden('_method','PUT')}}
+                                                            {{Form::submit('Simpan',['class'=>'btn btn-primary'])}}
+                                                        </div>
+                                                    {!!Form::close()!!}
                                                     </div>
                                                 </div>
                                                 </div>

@@ -12,11 +12,8 @@
 */
 
 Route::get('/', 'PagesController@index');
-
 Route::resource('notes','NotesController');
-
-
+Route::get('notes/update', 'NotesController@updateTitle');
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home/admin', 'HomeController@admin')->name('admin');

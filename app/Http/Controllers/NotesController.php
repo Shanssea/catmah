@@ -110,6 +110,14 @@ class NotesController extends Controller
         return redirect('/home')->with('success','Catatan telah diupdate!');
     }
 
+      /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+
     public function updateTitle(Request $request, $id){
         $this->validate($request, [
             'title' => 'required'
