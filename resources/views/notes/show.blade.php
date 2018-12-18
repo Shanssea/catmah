@@ -17,10 +17,9 @@
                     <div class="container">
                         <div style="width: 1000px; display: table-cell;">
                             <h1 class="my-4 section-heading text-faded" style="font-weight:bold; color:#F05F40">{{$note->title}}</h1>
-                            <h5 style="color:#212529">{{$note->subject}}</h5>
                         </div>
                         <div style="display: table-cell;">
-                                <a href="/home" class="btn btn-secondary">Kembali</a>
+                                <a href="/" class="btn btn-secondary">Kembali</a>
                         </div>
                     </div>
                 </div>

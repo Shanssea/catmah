@@ -48,14 +48,12 @@ class NotesController extends Controller
     {
         $this->validate($request, [
             'title' => 'required',
-            'subject' => 'required',
             'body' => 'required'
         ]);
 
         //Create Notes
         $note = new Note;
         $note->title = $request->input('title');
-        $note->subject = $request->input('subject');
         $note->body = $request->input('body');
         $note->user_id = auth()->user()->id;
         $note->save();
@@ -110,6 +108,16 @@ class NotesController extends Controller
         $note->save();
 
         return redirect('/home')->with('success','Catatan telah diupdate!');
+    }
+
+    public function updateTitle(Request $request, $id){
+        $this->validate($request, [
+            'title' => 'required'
+        ]);
+
+        $note = Note::find($id);
+        $note->title = $request->input('title');
+        $note->save();
     }
 
     /**
