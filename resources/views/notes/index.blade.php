@@ -86,7 +86,7 @@
                                                         <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
-                                                <input class = "text"type="text" name="url" value="catmah.local/X{{$note->url}}" readonly>
+                                                <input class = "form-control"type="text" name="url" value="catmah.local/X{{$note->url}}" style="margin-bottom: 1em" readonly>
                                                     </div>
                                                 </div>
                                                 </div>
