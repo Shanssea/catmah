@@ -10,7 +10,7 @@ $(document).ready(function(){
             type            : 'POST',
             url             : '/update',
             data            : {'body' : $('#textbox').val(),
-                                'id' : x},
+                                'url' : x},
         }).done(function(datay){
             console.log(datay);
         });
@@ -22,7 +22,7 @@ $(document).ready(function(){
             },
             type            : 'POST',
             url             : '/refresh',
-            data            : {'id' : x},
+            data            : {'url' : x},
         }).done(function(datax){
             //console.log(datax);
         $("#textbox").html("");

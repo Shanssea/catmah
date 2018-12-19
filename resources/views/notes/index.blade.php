@@ -35,7 +35,7 @@
                                         <table style="width:100%">
                                             @foreach ($notes as $note)
                                             <tr>
-                                                <td><h4 style="font-weight:bold"><a href="/notes/{{$note->id}}/edit">{{$note->title}}</a></h4></td>
+                                                <td><h4 style="font-weight:bold"><a href="/X{{$note->url}}">{{$note->title}}</a></h4></td>
                                             <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal{{$note->id}}">Edit Title & Link</button></td>
                                                 <div class="modal fade" id="Modal{{$note->id}}" tabindex="-1" role="dialog" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
@@ -48,9 +48,12 @@
                                                     </div>
                                                     <form class="form" method="POST" action="{{action('NotesController@updateTitle')}}">
                                                         @csrf
-                                                    <input type="hidden" name="id" value="{{$note->id}}">
+                                                    <input type="hidden" name="id" value="{{$note->url}}">
                                                         <div class="modal-body">
+                                                            <label for="title">Judul</label>
                                                             <input id="title" type="text" class="form-control" name="title" value="{{$note->title }}" autofocus>
+                                                            <label for="url">URL</label>
+                                                            <input id="url" type="text" class="form-control" name="url" value="{{$note->url }}" autofocus>
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -60,8 +63,23 @@
                                                     </div>
                                                 </div>
                                                 </div>
+                                                @php
+                                                 if($note->locked)$lock='Unlock';
+                                                 else $lock='Lock';
+                                                @endphp
+                                                <td> {!!Form::open(['action' => ['NotesController@lock'],'method'=>'POST', 'class' => 'pull-right'])!!}
+                                                        {{Form::hidden('url',$note->url)}}
+                                                        {{Form::submit($lock,['class'=>'btn btn-info'])}}
+                                                    {!!Form::close()!!}</td>
+
+                                            <td> {!!Form::open(['action' => ['NotesController@destroy', $note->url],'method'=>'POST', 'class' => 'pull-right'])!!}
+                                                    {{Form::hidden('_method','DELETE')}}
+                                                    {{Form::submit('Delete',['class'=>'btn btn-danger'])}}
+                                                {!!Form::close()!!}</td>
+                                                
                                                 <td><p>{{$note->created_at}}</p></td>
                                                 <td><h6>{{$note->subject}}</h6></td>
+
                                             </tr>
                                             @endforeach
                                         </table>

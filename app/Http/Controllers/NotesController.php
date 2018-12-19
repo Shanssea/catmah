@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Note;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Auth\Access\Response;
+use Illuminate\Support\Facades\Auth;
 
 class NotesController extends Controller
 {
@@ -50,13 +51,15 @@ class NotesController extends Controller
     {
         $this->validate($request, [
             'title' => 'required',
-            'body' => 'required'
+            'url' => 'required'
         ]);
-
+        $onote=Note::find($request->input('url'));
+        if($onote) return redirect('notes/create')->with('error','URL telah dipakai');
         //Create Notes
         $note = new Note;
         $note->title = $request->input('title');
-        $note->body = $request->input('body');
+        $note->url = $request->input('url');
+        $note->locked = false;
         $note->user_id = auth()->user()->id;
         $note->save();
 
@@ -81,10 +84,23 @@ class NotesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($url)
     {
-        $note = Note::find($id);
-        return view('notes.edit')->with('note',$note);
+        $note = Note::find($url);
+        if($note) 
+        {
+            if($note->locked==false)
+            return view('notes.edit')->with('note',$note);
+            else{
+                if(Auth()->id()==$note->user_id){
+                    return view('notes.edit')->with('note',$note);
+                }
+                else{
+                    return view('/home')->with('error','Note Dikunci');
+                }
+            }
+        }
+        else return redirect('/home')->with('error','Note tidak ada');
     }
 
     /**
@@ -116,12 +132,16 @@ class NotesController extends Controller
         $this->validate($request, [
             'title' => 'required'
         ]);
+        $onote=Note::find(Input::get('url'));
+        if($onote) return redirect('/home')->with('error','URL telah dipakai');
 
         $note = Note::find(Input::get('id'));
+
         $note->title = Input::get('title');
+        $note->url=Input::get('url');
         $note->save();
 
-        return redirect('/home')->with('success','Title telah di update!');
+        return redirect('/home')->with('success','Title/Link telah di update!');
     }
 
     /**
@@ -130,22 +150,45 @@ class NotesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($url)
     {
-        $note = Note::find($id);
+        $note = Note::find($url);
         $note->delete();
         return redirect('/home')->with('success','Note telah dihapus');
     }
 
     public function get(){        
-        $note = Note::find(Input::get('id'));
+        $note = Note::find(Input::get('url'));
         return $note->body;
     }
 
     public function updateBody(){
-        $note = Note::find(Input::get('id'));
+        $note = Note::find(Input::get('url'));
         $note->body = Input::get('body');
         $note->save();
         return $note->body;
+    }
+
+    public function lock()
+    {
+        $note = Note::find(Input::get('url'));
+        if($note)
+        {
+            if($note->locked==true) 
+            {
+                $note->locked=false;
+                $note->save();
+                return redirect('/home')->with('success','Note telah diunlock');
+            }
+            else 
+            {
+                $note->locked=true;
+                $note->save();
+                return redirect('/home')->with('success','Note telah dilock');
+            }
+        }
+        else
+        return redirect('/home')->with('error','Note tidak ada');
+        
     }
 }

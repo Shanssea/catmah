@@ -15,9 +15,10 @@ class CreateNotesTable extends Migration
     {
         Schema::create('notes', function (Blueprint $table) {
             $table->increments('id');
-           // $table->string('url')->unique();
+            $table->string('url')->unique();
             $table->string('title')->nullable();
             $table->mediumtext('body')->nullable();
+            $table->boolean('locked')->default(false);
             //$table->string('image')->nullable();
             $table->timestamps();
         });

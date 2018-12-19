@@ -16,13 +16,17 @@ use App\Http\Controllers\NotesController;
 
 Route::get('/', 'PagesController@index');
 
-Route::resource('notes','NotesController');
-
 
 Auth::routes();
 
+Route::get('/X{url}','NotesController@edit');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home/admin', 'HomeController@admin')->name('admin');
 Route::post('updateTitle/','NotesController@updateTitle');
 Route::post('/refresh','NotesController@get');
 Route::post('/update','NotesController@updateBody');
+Route::post('/lock','NotesController@lock');
+
+Route::resource('notes', 'NotesController')->only([
+    'index', 'show', 'store', 'create','destroy'
+]);

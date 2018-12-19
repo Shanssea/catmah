@@ -8,7 +8,7 @@
 
 <!-- Page Content -->
 <section>
-    <div id='data' data-id={{$note->id}}></div>
+    <div id='data' data-id={{$note->url}}></div>
 <div class="container">
         <div class="row">
             <div class="col-sm-15 col-md-10 col-lg-15 mx-auto">

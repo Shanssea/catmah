@@ -32,19 +32,21 @@
                             </div>
                             <div class="form-group">
                                     <label for="url">URL</label>
+                                    <div class ="container">
                                     <p class ="" style="">catmah.local/</p>
                                     <input type="text" class="form-control" style="width:auto;float:right" name="url">
+                                    </div>
                             </div>
                             <div style="display:table-cell">
                                 <div style="display:table-cell">
-
+                                    
                                 </div>
 
                             </div>
                             <div style="display: table-cell; " class="my-2 text-right">
                             {{Form::submit('Simpan',['class'=>'btn btn-primary'])}}
                             {!! Form::close() !!}
-                            <a href="/home" class="btn btn-secondary" style="">Return</a>
+                            <a href="/home" class="btn btn-secondary" style="   ">Return</a>
                             </div>
                         <br/>
                     </div>
