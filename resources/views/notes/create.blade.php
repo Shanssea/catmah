@@ -32,10 +32,7 @@
                             </div>
                             <div class="form-group">
                                     <label for="url">URL</label>
-                                    <div class ="container">
-                                    <p class ="" style="">catmah.local/</p>
-                                    <input type="text" class="form-control" style="width:auto;float:right" name="url">
-                                    </div>
+                                    <input type="text" class="form-control" name="url">
                             </div>
                             <div style="display:table-cell">
                                 <div style="display:table-cell">

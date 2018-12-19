@@ -76,6 +76,20 @@
                                                     {{Form::hidden('_method','DELETE')}}
                                                     {{Form::submit('Delete',['class'=>'btn btn-danger'])}}
                                                 {!!Form::close()!!}</td>
+                                                <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ShareModal{{$note->url}}">Get Link</button></td>
+                                                <div class="modal fade" id="ShareModal{{$note->url}}" tabindex="-1" role="dialog" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="ChangeModalLabel">Share Link</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                <input class = "text"type="text" name="url" value="catmah.local/X{{$note->url}}" readonly>
+                                                    </div>
+                                                </div>
+                                                </div>
                                                 
                                                 <td><p>{{$note->created_at}}</p></td>
                                                 <td><h6>{{$note->subject}}</h6></td>
