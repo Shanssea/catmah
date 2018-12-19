@@ -31,20 +31,27 @@
                                 {{Form::text('title','',['class' => 'form-control','placeholder' => 'Judul'])}}
                             </div>
                             <div class="form-group">
-                                    <label for="url">URL</label>
-                                    <p class ="" style="">catmah.local/</p>
-                                    <input type="text" class="form-control" style="width:auto;float:right" name="url">
-                            </div>
-                            <div style="display:table-cell">
-                                <div style="display:table-cell">
+                                <div>
+                                        <div style="display: table-cell">
+                                            <p>URL</p>
+                                        </div>
+                                </div>
+                                <div>
+                                        <div style="width:150px; display: table-cell">
+                                            <label for="url" style="my-10">catmah.local/</label>
+                                        </div>
+                                        <div style="display: table-cell">
+                                                <input type="text" class="form-control" style="width:450px; float:right" name="url">
+                                        </div>
 
                                 </div>
-
+                                
+                                    
                             </div>
-                            <div style="display: table-cell; " class="my-2 text-right">
-                            {{Form::submit('Simpan',['class'=>'btn btn-primary'])}}
-                            {!! Form::close() !!}
-                            <a href="/home" class="btn btn-secondary" style="">Return</a>
+                            <div class="my-2 text-right">
+                                    {{Form::submit('Simpan',['class'=>'btn btn-primary'])}}
+                                    {!! Form::close() !!}
+                                    <a href="/home" class="btn btn-secondary" style="">Return</a>
                             </div>
                         <br/>
                     </div>

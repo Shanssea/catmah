@@ -22,7 +22,11 @@ Route::resource('notes','NotesController');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/home/admin', 'HomeController@admin')->name('admin');
+// Route::get('/home/admin', 'HomeController@admin')->name('admin');
+
+//ADMIN
+Route::resource('/admin', 'AdminController');
+
 Route::post('updateTitle/','NotesController@updateTitle');
 Route::post('/refresh','NotesController@get');
 Route::post('/update','NotesController@updateBody');
