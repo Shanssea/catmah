@@ -36,28 +36,25 @@
                                             @foreach ($notes as $note)
                                             <tr>
                                                 <td><h4 style="font-weight:bold"><a href="/notes/{{$note->id}}/edit">{{$note->title}}</a></h4></td>
-                                                <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                                                Edit Title & Link
-                                                </button></td>
-
-                                                <!-- Modal -->
-                                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal{{$note->id}}">Edit Title & Link</button></td>
+                                                <div class="modal fade" id="Modal{{$note->id}}" tabindex="-1" role="dialog" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Edit Link</h5>
+                                                        <h5 class="modal-title" id="ChangeModalLabel">Edit Link</h5>
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
-                                                    <form class="form-signin" method="POST" action="{{ route('NotesController@updateTitle') }}">
+                                                    <form class="form" method="POST" action="{{action('NotesController@updateTitle')}}">
+                                                        @csrf
+                                                    <input type="hidden" name="id" value="{{$note->id}}">
                                                         <div class="modal-body">
-                                                            <input id="title" type="text" class="form-control" name="title" value="{{ old('title') }}" autofocus>
+                                                            <input id="title" type="text" class="form-control" name="title" value="{{$note->title }}" autofocus>
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                            <a href="{{ route('NoteController@updateTitle') }}" class="btn btn-block btn-secondary text-uppercase">{{ __('Simpan') }}</a>
-                                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                                            <button type="submit" class="btn btn-primary">Save changes</button>
                                                         </div>
                                                     </form>
                                                     </div>

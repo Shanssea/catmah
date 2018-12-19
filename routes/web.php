@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\NotesController;
+//use Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,3 +23,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home/admin', 'HomeController@admin')->name('admin');
+Route::post('updateTitle/','NotesController@updateTitle');
+Route::post('/refresh','NotesController@get');
+Route::post('/update','NotesController@updateBody');

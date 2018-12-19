@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Note;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Auth\Access\Response;
 
 class NotesController extends Controller
 {
@@ -110,14 +112,16 @@ class NotesController extends Controller
         return redirect('/home')->with('success','Catatan telah diupdate!');
     }
 
-    public function updateTitle(Request $request, $id){
+    public function updateTitle(Request $request){
         $this->validate($request, [
             'title' => 'required'
         ]);
 
-        $note = Note::find($id);
-        $note->title = $request->input('title');
+        $note = Note::find(Input::get('id'));
+        $note->title = Input::get('title');
         $note->save();
+
+        return redirect('/home')->with('success','Title telah di update!');
     }
 
     /**
@@ -131,5 +135,17 @@ class NotesController extends Controller
         $note = Note::find($id);
         $note->delete();
         return redirect('/home')->with('success','Note telah dihapus');
+    }
+
+    public function get(){        
+        $note = Note::find(Input::get('id'));
+        return $note->body;
+    }
+
+    public function updateBody(){
+        $note = Note::find(Input::get('id'));
+        $note->body = Input::get('body');
+        $note->save();
+        return $note->body;
     }
 }

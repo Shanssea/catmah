@@ -31,8 +31,9 @@
                                 {{Form::text('title','',['class' => 'form-control','placeholder' => 'Judul'])}}
                             </div>
                             <div class="form-group">
-                                    {{Form::label('body','Catatan')}}
-                                    {{Form::textarea('body','',['class' => 'form-control','placeholder' => 'Mulailah menulis!'])}}
+                                    <label for="url">URL</label>
+                                    <p class ="" style="">catmah.local/</p>
+                                    <input type="text" class="form-control" style="width:auto;float:right" name="url">
                             </div>
                             <div style="display:table-cell">
                                 <div style="display:table-cell">
@@ -40,10 +41,10 @@
                                 </div>
 
                             </div>
+                            <div style="display: table-cell; " class="my-2 text-right">
                             {{Form::submit('Simpan',['class'=>'btn btn-primary'])}}
                             {!! Form::close() !!}
-                            <div style="display: table-cell; " class="my-2 text-right">
-                                    <a href="/home" class="btn btn-secondary">Return</a>
+                            <a href="/home" class="btn btn-secondary" style="">Return</a>
                             </div>
                         <br/>
                     </div>

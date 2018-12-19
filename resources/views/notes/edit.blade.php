@@ -8,11 +8,12 @@
 
 <!-- Page Content -->
 <section>
+    <div id='data' data-id={{$note->id}}></div>
 <div class="container">
         <div class="row">
             <div class="col-sm-15 col-md-10 col-lg-15 mx-auto">
                     <div class="container card card-signin bg-light">
-    
+                        
                             <!-- Page Heading -->
                             <div style="display: table;">
                                     <div style="display: table-row">
@@ -25,15 +26,20 @@
                             </div>
                             <hr>
 
-        {!! Form::open(['action' => ['NotesController@update',$note->id],'method'=>'POST']) !!}
-            <div class="form-group">
-                    {{Form::label('body','Catatan')}}
-                    {{Form::textarea('body',$note->body,['class' => 'form-control','placeholder' => 'Mulailah menulis!'])}}
-            </div>
-            {{Form::hidden('_method','PUT')}}
-            {{Form::submit('Simpan',['class'=>'btn btn-primary'])}}
-            {!! Form::close() !!}
+                            <form class="form" method="POST" action="">
+                                @csrf
+                            <label for="textbox">Catatan</label>
+                            <textarea class="form-control" cols="50" rows="10" id="textbox" style="margin-bottom: 5em">{{$note->body}}</textarea>
+                                </div>
+                                </div>
+                            </form>
+        
+            
         <br/>
     </div>
 </section>
+@endsection
+
+@section("scripts")
+<script src="{{asset('js/live.js')}}"></script>
 @endsection
