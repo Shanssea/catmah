@@ -96,7 +96,7 @@ class NotesController extends Controller
                     return view('notes.edit')->with('note',$note);
                 }
                 else{
-                    return view('/home')->with('error','Note Dikunci');
+                    return redirect('/home')->with('error','Note Dikunci');
                 }
             }
         }
