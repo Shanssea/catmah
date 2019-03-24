@@ -26,6 +26,7 @@ Route::post('updateTitle/','NotesController@updateTitle');
 Route::post('/refresh','NotesController@get');
 Route::post('/update','NotesController@updateBody');
 Route::post('/lock','NotesController@lock');
+Route::post('/search', 'NotesController@search');
 
 Route::resource('notes', 'NotesController')->only([
     'index', 'show', 'store', 'create','destroy'

@@ -133,15 +133,17 @@ class NotesController extends Controller
             'title' => 'required'
         ]);
         $onote=Note::find(Input::get('url'));
+        $onote->title = Input::get('title');
+        $onote->save();
         if($onote) return redirect('/home')->with('error','URL telah dipakai');
 
         $note = Note::find(Input::get('id'));
 
-        $note->title = Input::get('title');
+        
         $note->url=Input::get('url');
         $note->save();
 
-        return redirect('/home')->with('success','Title/Link telah di update!');
+        return redirect('/home')->with('success','Link telah di update!');
     }
 
     /**
@@ -191,4 +193,14 @@ class NotesController extends Controller
         return redirect('/home')->with('error','Note tidak ada');
         
     }
+
+    public function search(){
+        $keyword=Input::get('keyword');
+        $notes = Note::when($keyword, function ($query) use ($keyword) {
+            $query->where('title', 'like', "%{$keyword}%")
+                ->orWhere('body', 'like', "%{$keyword}%");
+        })->where('user_id',Auth()->id())->orderBy('created_at','desc')->paginate(10);
+        return view('notes.index')->with('notes',$notes);
+    }
+    
 }

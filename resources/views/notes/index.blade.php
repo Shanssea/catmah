@@ -29,7 +29,13 @@
                     <div class="card-body">
                             <h1  style="text-align:center ;font-weight:bold; color:#212529">Notes</h1>
                                 <hr>
-                        
+                                <form action="/search" method="POST" role="search">
+                                    {{ csrf_field() }}
+                                    <div class="input-group" style="margin-bottom: 1em">
+                                        <input type="text" class="form-control" name="keyword"placeholder="Cari Catatanmu!"> 
+                                        <button type="submit" class="btn btn-default">Cari!</button>
+                                    </div>
+                                </form>
                                 @if (count ($notes) > 0)
                                 <div>
                                         <table style="width:100%">

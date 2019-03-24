@@ -24,9 +24,8 @@ $(document).ready(function(){
             url             : '/refresh',
             data            : {'url' : x},
         }).done(function(datax){
-            //console.log(datax);
-        $("#textbox").html("");
-        $("#textbox").html(datax);
+        console.log(datax);
+        $("#textbox").val(datax);
         });
     }
     $("#textbox").focus(function(){
